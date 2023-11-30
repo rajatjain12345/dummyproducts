@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style></style>
+
+  <body>
+    <div>
+      <div class="wrapper">
+        <div class="products"></div>
+      </div>
+    </div>
+
+    <script>
+      let productpart = document.querySelector(".products");
+      let imgpart = document.createElement("img");
+      let parapart = document.createElement("h3");
+      let descrb = document.createElement("p");
+      let price = document.createElement("h5");
+
+      for (let i = 0; i < 5; i++) {
+        // let contentpart = document.createElement("div");
+        // contentpart.className = "products";
+        // document.querySelector(".board").appendChild(contentpart); 
+        async function data() {
+          let store = await fetch("https://dummyjson.com/products");
+          let demo = await store.json();
+          console.log(demo.products)
+          let product = demo.products[0].images[0];
+          let titlestore = demo.products[0].title;
+          let descrbstore = demo.products[0].description;
+          let pricepart = demo.products[0].price;
+          imgpart.src = product;
+          parapart.innerHTML = titlestore;
+          descrb.innerHTML = descrbstore;
+          price.innerHTML = pricepart;
+          productpart.appendChild(imgpart);
+          productpart.appendChild(parapart);
+          productpart.appendChild(descrb);
+          productpart.appendChild(price);  
+        }
+        data();
+      }
+     
+    </script>
+  </body>
+</html>
